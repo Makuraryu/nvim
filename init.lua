@@ -198,6 +198,15 @@ end, { desc = 'Diffget' })
 -- Comment keymap - mapping <leader>c to gcc (toggle line comment)
 vim.keymap.set('n', '<leader>c', 'gcc', { desc = '[C]omment toggle', remap = true })
 
+-- Toggle dark/light background for token colorscheme
+vim.keymap.set('n', '<leader>tb', function()
+  if vim.o.background == 'dark' then
+    vim.o.background = 'light'
+  else
+    vim.o.background = 'dark'
+  end
+end, { desc = '[T]oggle [B]ackground dark/light' })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -928,15 +937,10 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'shaunsingh/nord.nvim',
+    'ThorstenRhau/token',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
-      vim.g.nord_borders = true
-      vim.g.nord_contrast = true
-      vim.g.nord_disable_background = false
-
-      -- Load the colorscheme here.
-      vim.cmd.colorscheme 'nord'
+      vim.cmd.colorscheme 'token'
     end,
   },
 
