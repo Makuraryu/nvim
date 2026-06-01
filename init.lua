@@ -862,6 +862,19 @@ require('lazy').setup({
         opts = {},
       },
       'folke/lazydev.nvim',
+
+      -- Copilot backend + blink.cmp source
+      {
+        'zbirenbaum/copilot.lua',
+        cmd = 'Copilot',
+        event = 'InsertEnter',
+        opts = {
+          -- Let blink.cmp show suggestions in its menu instead of inline ghost text.
+          suggestion = { enabled = false },
+          panel = { enabled = false },
+        },
+      },
+      'fang2hou/blink-copilot',
     },
     --- @module 'blink.cmp'
     --- @type blink.cmp.Config
@@ -910,9 +923,15 @@ require('lazy').setup({
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'lazydev' },
+        default = { 'copilot', 'lsp', 'path', 'snippets', 'lazydev' },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+          copilot = {
+            name = 'copilot',
+            module = 'blink-copilot',
+            score_offset = 100,
+            async = true,
+          },
         },
       },
 
